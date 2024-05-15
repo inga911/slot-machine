@@ -1,0 +1,30 @@
+body {
+  height: 100vh;
+}
+
+.game-box {
+  border: 1px solid lightcoral;
+  width: 500px;
+  height: 400px;
+}
+
+.box-one,
+.box-two,
+.box-three {
+  border: 1px solid rgb(77, 78, 76);
+  width: 30%;
+  height: 95%;
+}
+
+.item {
+  height: 20%;
+  align-content: center;
+  font-size: 45px;
+  filter: brightness(90%);
+}
+.middle {
+  border: none;
+  border-top: 1px solid lightseagreen;
+  border-bottom: 1px solid lightseagreen;
+  /* filter: brightness(100%); */
+}
