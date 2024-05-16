@@ -6,11 +6,16 @@ const boxThree = document.querySelector('.box-three')
 const items = document.querySelectorAll('.item')
 const middleItems = document.querySelectorAll('.middle')
 const bidHtml = document.querySelector('.bid')
-const playBtn = document.querySelector('button')
+const playBtn = document.getElementById('playBtn')
+const modal = document.getElementById('modal')
+const closeModalBtn = document.querySelector('.close-modal')
+const modalTxt = document.querySelector('.modal-text')
+
 
 let originalArr = ['🥨', '🍋', '🍉', '🥐', '🍕']
 let money = 1000
-let bid = 0
+let bid
+
 
 
 function updateMoneyHtml(money) {
@@ -48,26 +53,40 @@ function appendBox() {
     }
 
     if (arr1[2] === arr2[2] && arr2[2] === arr3[2]) {
-        console.log('vienodi');
-        console.log(arr1[2]);
-        console.log(arr2[2]);
-        console.log(arr3[2]);
-    } else {
-        console.log('nevienodi');
-        console.log(arr1[2]);
-        console.log(arr2[2]);
-        console.log(arr3[2]);
+        money += 500
+        showModal();
+        modalTxt.innerHTML = 'You won!'
+        closeModalBtn.innerHTML = 'Play more'
+        updateMoneyHtml(money);
     }
 }
 appendBox()
 
-playBtn.onclick = () => {
-    if (money <= bid) {
-        console.log('neuztenka pinigu');
-        return
-    }
-    appendBox()
 
-    money -= bid
-    updateMoneyHtml(money)
+
+function showModal() {
+    modal.showModal();
 }
+
+function closeModal() {
+    modal.close();
+}
+
+closeModalBtn.onclick = () => {
+    closeModal()
+}
+
+playBtn.onclick = () => {
+    bid = Number(bidHtml.value);
+    console.log(bid);
+    if (money < bid) {
+        console.log('Not enough money');
+        showModal();
+        modalTxt.innerHTML = 'Not enough money. Try next time.'
+        closeModalBtn.innerHTML = 'Ok'
+    } else {
+        appendBox();
+        money -= bid;
+        updateMoneyHtml(money);
+    }
+};
